@@ -44,10 +44,11 @@
   在使用webpack的时候，需要创建一个名为 `webpack.config.js` 的配置文件，这个文件在安装webpack的时候，是不会自动创建的，是需要手动创建，文件的位置要放在当前安装webpack根目录下
 
   ```js
-  	var path = require('path');
+	var path = require('path');
 
 	module.exports = {
 		entry: path.resolve(__dirname, './app/app.js'),
+		output: {
 			path: path.resolve(__dirname, './build'),
 			filename: 'js/build.js'
 		},
@@ -63,9 +64,11 @@
 		}
 	}
   ```
-		output: {
 
-  这是一个简单的webpack的配置,首先先引用了`path`对象，`entry`是一个入口文件，在这个文件中的所有内容，会被打包到`output`指定目录的指定文件当中，`path.resolve`是一个来格式化路径的方法，`path.resolve`的方法参数有两个`path.resolve(from,to)`,`from`这里的`__dirname`是为了获取当前模块文件所在的目录,`to`这里的`./app/app.js`是一个相对路径，`ouput`是出口,`ouput`中的path和entry的方法同理，这里不做赘述。`filename`是指向一个指定文件，入口打包的所有文件，最后代码都会在这个出口文件中看到。
+  这是一个简单的webpack的配置，首先先引用了`path`对象。
+  `entry`是一个入口文件，在这个文件中的所有内容，会被打包到`output`指定目录的指定文件当中。
+  `path.resolve`是一个来格式化路径的方法，`path.resolve`的方法参数有两个`path.resolve(from，to)`，`from`这里的`__dirname`是为了获取当前模块文件所在的目录，`to`这里的`./app/app.js`是一个相对路径，`ouput`是出口，`ouput`中的path和entry的方法同理，这里不做赘述。
+  `filename`是指向一个指定文件，入口打包的所有文件，最后代码都会在这个出口文件中看到。
 
   module中添加的loaders这个数组，里面的对象是用来转换模块的，现在这里只添加了一个js的模块，用来转换es6语法和react
 
@@ -108,7 +111,7 @@
   npm install react react-dom --save-dev
   ```
 
-  安装完成后，打开`component.js`,修改为:
+  安装完成后，打开`component.js`，修改为:
 
  ```js
 	import React from 'react';
@@ -120,7 +123,7 @@
 	}
  ```
 
- 打开 `app.js` ,修改为:
+ 打开 `app.js` ，修改为:
 
  ```js
 	import React from 'react';
