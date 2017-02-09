@@ -66,9 +66,13 @@
   ```
 
   这是一个简单的webpack的配置，首先先引用了`path`对象。
+
   `entry`是一个入口文件，在这个文件中的所有内容，会被打包到`output`指定目录的指定文件当中。
+
   `path.resolve`是一个来格式化路径的方法，`path.resolve`的方法参数有两个`path.resolve(from，to)`，`from`这里的`__dirname`是为了获取当前模块文件所在的目录，`to`这里的`./app/app.js`是一个相对路径，`ouput`是出口，`ouput`中的path和entry的方法同理，这里不做赘述。
+
   `filename`是指向一个指定文件，入口打包的所有文件，最后代码都会在这个出口文件中看到。
+
 
   module中添加的loaders这个数组，里面的对象是用来转换模块的，现在这里只添加了一个js的模块，用来转换es6语法和react
 
