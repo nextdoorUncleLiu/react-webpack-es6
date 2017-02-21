@@ -142,6 +142,68 @@
 
   运行 `webpack` ，这个时候就完成了一个简单的 `webpack + react + es6` 的模块化开发，可以直接双击打开 `index.html` 查看演示，也可以运行 `webpack-dev-server` 打开本地服务器，浏览器打开 `http://localhost:8080/build/index.html` 查看演示
 
+## React组件生命周期
+
+-getDefaultProps
+
+  作用于组件类，只调用一次，返回对象用于设置默认的props，对于引用值，会在实例中共享。
+
+
+-getInitialState
+
+  作用于组件的实例，在实例创建时调用一次，用于初始化每个实例的state，此时可以访问this.props。(es6不支持)
+
+
+-componentWillMount
+
+  在完成首次渲染之前调用，此时仍可以修改组件的state。
+
+
+-render
+
+  必选的方法，创建虚拟DOM，该方法具有特殊的规则：
+
+  1、只能通过this.props和this.state访问数据
+  2、可以返回null、false或任何React组件
+  3、只能出现一个顶级组件（不能返回数组）
+  4、不能改变组件的状态
+  5、不能修改DOM的输出
+
+
+-componentDidMount
+
+  真实的DOM被渲染出来后调用，在该方法中可通过this.getDOMNode()访问到真实的DOM元素。此时已可以使用其他类库来操作这个DOM。
+
+  在服务端中，该方法不会被调用。
+
+
+-componentWillReceiveProps
+
+  组件接收到新的props时调用，并将其作为参数nextProps使用，此时可以更改组件props及state。
+
+
+-shouldComponentUpdate
+
+  组件是否应当渲染新的props或state，返回false表示跳过后续的生命周期方法，通常不需要使用以避免出现bug。在出现应用的瓶颈时，可通过该方法进行适当的优化。
+
+  在首次渲染期间或者调用了forceUpdate方法后，该方法不会被调用
+
+
+-componentWillUpdate
+
+  接收到新的props或者state后，进行渲染之前调用，此时不允许更新props或state。
+
+
+-componentDidUpdate
+
+  完成渲染新的props或者state后调用，此时可以访问到新的DOM元素。
+
+
+-componentWillUnmount
+
+  组件被移除之前被调用，可以用于做一些清理工作，在componentDidMount方法中添加的所有任务都需要在该方法中撤销，比如创建的定时器或添加的事件监听器。
+
+
 ## React调试（ React Developer Tools ）
 
   如果直接在浏览器调试的话，我们只能在Element中看到渲染后的DOM分层结构，如果想看到React组件的分层结构，就会需要到一个调试工具，因为本人比较喜欢使用chrome浏览器进行调试，所以这里暂时只拿chrome浏览器来举例。
